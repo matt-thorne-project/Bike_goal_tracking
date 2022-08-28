@@ -2,14 +2,15 @@ import mysql.connector
 from matplotlib import pyplot as plt
 
 mydb = mysql.connector.connect(
-  host="localhost",
-  user="matt",
-  passwd="MySQLPassword!"
+    host="localhost",
+    user="XXX",
+    passwd="XXX",
+    database='cycling_stats'
 )
 
 mycursor = mydb.cursor()
 
-sql = "SELECT date, ftp, weight FROM cycling_stats.t_measurement WHERE date > '2021-01-01'"
+sql = "SELECT date, ftp, weight FROM t_ftp_measurement WHERE date > '2021-01-01'"
 
 mycursor.execute(sql)
 results = list(mycursor.fetchall())
