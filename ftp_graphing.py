@@ -2,10 +2,10 @@ import mysql.connector
 from matplotlib import pyplot as plt
 
 mydb = mysql.connector.connect(
-  host="localhost",
-  user="matt",
-  passwd="MySQLPassword1!",
-  database='cycling_stats'
+    host="localhost",
+    user="XXX",
+    passwd="XXX",
+    database='cycling_stats'
 )
 
 mycursor = mydb.cursor()
