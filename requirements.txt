@@ -1,0 +1,4 @@
+mysql.connector
+matplotlib
+inquirer
+datetime
