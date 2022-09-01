@@ -48,4 +48,4 @@ ax3.tick_params(axis='x', labelrotation = 45)
 plt.legend(["Watt per Kilo"])
 
 
-plt.show()
+plt.savefig('Bikeprogress.png')
