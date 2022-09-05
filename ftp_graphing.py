@@ -2,10 +2,10 @@ import mysql.connector
 from matplotlib import pyplot as plt
 
 mydb = mysql.connector.connect(
-    host="localhost",
-    user="XXX",
-    passwd="XXX",
-    database='cycling_stats'
+  host="localhost",
+  user="matt",
+  passwd="MySQLPassword1!",
+  database='cycling_stats'
 )
 
 mycursor = mydb.cursor()
@@ -27,12 +27,12 @@ for i in results:
     wkg.append(i[1]/i[2])
   
     
-plt.figure(figsize = (15, 20))
+plt.figure(figsize = (20, 30))
 
 ax1 = plt.subplot(2, 1, 1)
 ax2=ax1.twinx()
-lns1 = ax1.plot(dates, ftp, "g-", label="FTP")
-lns2 = ax2.plot(dates, weight, "b-", label="Weight")
+lns1 = ax1.plot(dates, ftp, "g-", label="FTP", marker = "o")
+lns2 = ax2.plot(dates, weight, "b-", label="Weight", marker = "o")
 ax1.set_ylabel("FTP", fontsize = 14)
 ax2.set_ylabel("Weight", fontsize = 14)
 ax1.tick_params(axis='x', labelrotation = 45)
@@ -40,12 +40,13 @@ ax1.tick_params(axis='x', labelrotation = 45)
 lines, labels = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
 ax2.legend(lines + lines2, labels + labels2, loc=0)
+plt.savefig('/var/www/ftp/ftp_weight.png', transparent = True, bbox_inches='tight')
 
-ax3 = plt.subplot(2, 1, 2)
-ax3.plot(dates, wkg)
-ax3.set_ylabel("Watts per Kilo", fontsize = 14)
-ax3.tick_params(axis='x', labelrotation = 45)
+
+plt.figure(figsize = (20, 30))
+ax = plt.subplot(2, 1, 2)
+plt.plot(dates, wkg)
+ax.set_ylabel("Watts per Kilo", fontsize = 14)
+plt.tick_params(axis='x', labelrotation = 45)
 plt.legend(["Watt per Kilo"])
-
-
-plt.savefig('Bikeprogress.png')
+plt.savefig('/var/www/ftp/bikeprogress.png', transparent = True, bbox_inches='tight')
