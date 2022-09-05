@@ -1,11 +1,12 @@
 import mysql.connector
 from matplotlib import pyplot as plt
+import key_file as key_file 
 
 mydb = mysql.connector.connect(
-    host="localhost",
-    user="XXX",
-    passwd="XXX",
-    database='cycling_stats'
+  host = key_file.DB_HOST,
+  user = key_file.DB_USER,
+  passwd = key_file.DB_PASSWD,
+  database = key_file.DB_DATABASE
 )
 
 mycursor = mydb.cursor()
