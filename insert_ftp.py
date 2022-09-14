@@ -55,8 +55,11 @@ ftp = int(input())
 print('What is your weight?')
 weight = (float(input()))
 
-sql = f"INSERT INTO t_ftp_measurement (date, ftp, weight) VALUES (%s, %s, %s);"
-val =(parsedDate, ftp, weight)
+print('What is your BF percentage?')
+body_fat = (float(input()))
+
+sql = f"INSERT INTO t_ftp_measurement (date, ftp, weight, body_fat) VALUES (%s, %s, %s, %s);"
+val =(parsedDate, ftp, weight, body_fat)
 
 mycursor.execute(sql, val)
 mydb.commit()
