@@ -1,7 +1,7 @@
 from datetime  import datetime
 import mysql.connector
 import inquirer
-import key_file as key_file 
+import key_file as key_file
 
 mydb = mysql.connector.connect(
   host = key_file.DB_HOST,
@@ -12,13 +12,13 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-print('What the date of test?')
+print('Year of reading?')
 year = int(input())
 
 monthList = [
     inquirer.List(
         'option', 
-        message = 'What is your month of test?', 
+        message = 'Month of reading?', 
         choices = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
         carousel = True
     ),
@@ -29,7 +29,7 @@ month = (inquirer.prompt(monthList)).get('option')
 dayList = [
     inquirer.List(
         'option', 
-        message = 'What is your day of test?', 
+        message = 'Day of reading?', 
         choices = list(range(1,32)),
         carousel = True
     ),
@@ -49,17 +49,15 @@ except ValueError:
 
 parsedDate = datetime.strptime(f'{date}', '%Y-%b-%d').date()
 
+
 print('What is your ftp?')
 ftp = int(input())
 
 print('What is your weight?')
 weight = (float(input()))
 
-print('What is your BF percentage?')
-body_fat = (float(input()))
-
-sql = f"INSERT INTO t_ftp_measurement (date, ftp, weight, body_fat) VALUES (%s, %s, %s, %s);"
-val =(parsedDate, ftp, weight, body_fat)
+sql = f"INSERT INTO t_ftp_measurement (date, ftp, weight) VALUES (%s, %s, %s);"
+val =(parsedDate, ftp, weight)
 
 mycursor.execute(sql, val)
 mydb.commit()
