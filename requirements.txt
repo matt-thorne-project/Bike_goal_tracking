@@ -2,3 +2,5 @@ mysql.connector
 matplotlib
 inquirer
 datetime
+df2img
+pandas
