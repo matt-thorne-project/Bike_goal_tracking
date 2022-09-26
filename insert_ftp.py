@@ -47,17 +47,43 @@ except ValueError:
     print("Date entered isn't valid.")
     exit()
 
+print('Time of reading? 24Hr')
+time = input()
+
 parsedDate = datetime.strptime(f'{date}', '%Y-%b-%d').date()
 
 
-print('What is your ftp?')
-ftp = int(input())
+print("""Are you entering a) performance or b) bp metrics?
+Enter A or B""")
+option = input()
 
-print('What is your weight?')
-weight = (float(input()))
+if option == "A" or option == "a":
+    print('What is your ftp?')
+    ftp = int(input())
+    print('What is your weight?')
+    weight = (float(input()))
+    print('What is your BF percentage?')
+    body_fat = (float(input()))
+    sql = f"INSERT INTO t_ftp_measurement (date, ftp, weight, body_fat) VALUES (%s, %s, %s, %s);"
+    val =(parsedDate, ftp, weight, body_fat)
 
-sql = f"INSERT INTO t_ftp_measurement (date, ftp, weight) VALUES (%s, %s, %s);"
-val =(parsedDate, ftp, weight)
+elif option == "B" or option == "b":
+    print('What is your hr?')
+    hr = int(input())
+    print('What is your systolic?')
+    systolic = int(input())
+    print('What is your diastolic?')
+    diastolic = int(input())
+    print('Do you have any notes? Y/N')
+    y_n = input()
+    if y_n == "Y" or y_n == "y":
+        print("Complete your notes")
+        notes = input()
+        sql = f"INSERT INTO t_blood_pressure (date, hr_min, systolic, diastolic, notes) VALUES (%s, %s, %s, %s, %s);"
+        val =(timestamp, hr, systolic, diastolic, notes)
+    else:
+        sql = f"INSERT INTO t_blood_pressure (date, hr_min, systolic, diastolic) VALUES (%s, %s, %s, %s);"
+        val =(timestamp, hr, systolic, diastolic)
 
 mycursor.execute(sql, val)
 mydb.commit()
