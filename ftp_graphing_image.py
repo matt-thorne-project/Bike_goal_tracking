@@ -1,11 +1,12 @@
 import mysql.connector
 from matplotlib import pyplot as plt
+import key_file as key_file 
 
 mydb = mysql.connector.connect(
-  host = "XXXX",
-  user = "XXXX",
-  passwd = "XXXX",
-  database = "XXXX"
+  host = key_file.DB_HOST,
+  user = key_file.DB_USER,
+  passwd = key_file.DB_PASSWD,
+  database = key_file.DB_DATABASE
 )
 
 mycursor = mydb.cursor()
@@ -40,6 +41,7 @@ ax1.tick_params(axis='x', labelrotation = 45)
 lines, labels = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
 ax2.legend(lines + lines2, labels + labels2, loc=0)
+plt.savefig('/var/www/ftp/ftp_weight.png', transparent = True, bbox_inches='tight')
 
 
 plt.figure(figsize = (20, 30))
@@ -48,6 +50,7 @@ plt.plot(dates, wkg)
 ax.set_ylabel("Watts per Kilo", fontsize = 14)
 plt.tick_params(axis='x', labelrotation = 45)
 plt.legend(["Watt per Kilo"])
+plt.savefig('/var/www/ftp/bikeprogress.png', transparent = True, bbox_inches='tight')
 
 
 plt.figure(figsize = (20, 30))
@@ -59,3 +62,4 @@ ax.set_ylabel("Kilos", fontsize = 14)
 plt.tick_params(axis='x', labelrotation = 45)
 plt.legend(["Kilos"])
 plt.ylim(ymax = 72, ymin = 62)
+plt.savefig('/var/www/ftp/weight_change.png', transparent = True, bbox_inches='tight')
