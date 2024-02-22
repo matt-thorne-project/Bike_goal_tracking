@@ -1,6 +1,6 @@
 mysql.connector
 matplotlib
-inquirer
+inquirer #for interactive python script to update database
 datetime
 df2img
 pandas
