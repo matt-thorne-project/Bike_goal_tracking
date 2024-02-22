@@ -1,11 +1,10 @@
 # Bike Goals and Health Stats Tracking
-Project to using Python, MySQL and HMTL to allow for viewing longterm changes in my cycling performance and some health statistics.
+Project to using Python and MySQL to allow for viewing longterm changes in my cycling performance and some health statistics.
 
 ## Requirements
 + **MySQL Database** - this can be locally hosted or remotely
 + **Python3** - the `requirements.txt` will cover the pip packages required by Python
 + **Anaconda or jupyter notebook** - if you want to view the results locally
-+ **Apache2** - if you wish to host the HTML page
 +  **SQL Admin Software**
 
 ## Initial Setup
@@ -17,4 +16,4 @@ Project to using Python, MySQL and HMTL to allow for viewing longterm changes in
 You can either run the python files to add readings interactively or run the inserts manually in your SQL Admin tool
 
 ## Viewing Your Perfomance Changes in Anaconda
-The open `ftp_graphing.py` and `blood_pressure_tables.py` and using the scripts in Anaconda to view the graphs of your changes. 
+The open `ftp_graphing.py` and `blood_pressure_tables.py` and copy the scripts into jupyter notebook to view the graphs of your changes. 
