@@ -64,7 +64,9 @@ if option == "A" or option == "a":
     weight = (float(input()))
     print('What is your BF percentage?')
     body_fat = (float(input()))
-    sql = f"INSERT INTO t_ftp_measurement (date, ftp, weight, body_fat) VALUES (%s, %s, %s, %s);"
+    print('Notes?')
+    notes = (str(input()))
+    sql = f"INSERT INTO t_measurements (date, ftp, weight, body_fat, notes) VALUES (%s, %s, %s, %s, %s);"
     val =(parsedDate, ftp, weight, body_fat)
 
 elif option == "B" or option == "b":
@@ -79,10 +81,10 @@ elif option == "B" or option == "b":
     if y_n == "Y" or y_n == "y":
         print("Complete your notes")
         notes = input()
-        sql = f"INSERT INTO t_blood_pressure (date, hr_min, systolic, diastolic, notes) VALUES (%s, %s, %s, %s, %s);"
+        sql = f"INSERT INTO t_blood_pressure (date, hr, systolic, diastolic, notes) VALUES (%s, %s, %s, %s, %s);"
         val =(timestamp, hr, systolic, diastolic, notes)
     else:
-        sql = f"INSERT INTO t_blood_pressure (date, hr_min, systolic, diastolic) VALUES (%s, %s, %s, %s);"
+        sql = f"INSERT INTO t_blood_pressure (date, hr, systolic, diastolic) VALUES (%s, %s, %s, %s);"
         val =(timestamp, hr, systolic, diastolic)
 
 mycursor.execute(sql, val)
