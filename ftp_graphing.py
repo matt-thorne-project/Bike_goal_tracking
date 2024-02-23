@@ -10,7 +10,7 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-sql = "SELECT date, ftp, weight FROM t_ftp_measurement WHERE date > '2021-01-01'"
+sql = "SELECT date, ftp, weight FROM t_measurements WHERE date > '2021-01-01'"
 
 mycursor.execute(sql)
 results = list(mycursor.fetchall())

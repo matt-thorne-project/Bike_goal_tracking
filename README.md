@@ -17,3 +17,4 @@ You can either run the python files to add readings interactively or run the ins
 
 ## Viewing Your Perfomance Changes in Anaconda
 The open `ftp_graphing.py` and `blood_pressure_tables.py` and copy the scripts into jupyter notebook to view the graphs of your changes. 
+You will need to include the database connection inforamtion.

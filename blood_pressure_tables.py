@@ -13,7 +13,7 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-sql = "SELECT date, hr_min, CONCAT (systolic, '/', diastolic, 'mmHg'), notes FROM t_blood_pressure"
+sql = "SELECT date, hr, CONCAT (systolic, '/', diastolic, 'mmHg'), notes FROM t_blood_pressure"
 
 mycursor.execute(sql)
 results = list(mycursor.fetchall())
