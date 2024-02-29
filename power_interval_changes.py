@@ -1,5 +1,6 @@
 from matplotlib import pyplot as plt
 import mysql.connector
+import matplotlib.dates as mdates
 
 mydb = mysql.connector.connect(
   host = "xxx",
@@ -34,16 +35,29 @@ for i in results:
 plt.figure(figsize = (20, 30))
 
 # Plotting all the intervals
-plt.plot(date, sixty_sec, color='r', label='60s') 
-plt.plot(date, five_min, color='g', label='5m')
-plt.plot(date, twenty_min, color='b', label='20m') 
-plt.plot(date, sixty_min, color='y', label='60m') 
-plt.plot(date, ninety_min, color='r', label='90m') 
+plt.step(date, sixty_sec, color='r', label='60s') 
+plt.step(date, five_min, color='g', label='5m')
   
 # Naming x-axis, y-axis
 plt.xlabel("Month") 
 plt.ylabel("W/kg") 
 
 plt.legend() 
+plt.gca().xaxis.set_major_locator(locator)
+plt.gca().xaxis.set_major_formatter(fmt)
+plt.show()
 
+plt.figure(figsize = (20, 30))
+
+plt.step(date, twenty_min, color='b', label='20m') 
+plt.step(date, sixty_min, color='y', label='60m') 
+plt.step(date, ninety_min, color='r', label='90m') 
+
+# Naming x-axis, y-axis
+plt.xlabel("Month") 
+plt.ylabel("W/kg") 
+
+plt.legend() 
+plt.gca().xaxis.set_major_locator(locator)
+plt.gca().xaxis.set_major_formatter(fmt)
 plt.show()
