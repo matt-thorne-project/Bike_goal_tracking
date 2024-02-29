@@ -1,6 +1,6 @@
 from matplotlib import pyplot as plt
 import mysql.connector
-import matplotlib.dates as mdates
+
 
 mydb = mysql.connector.connect(
   host = "xxx",
