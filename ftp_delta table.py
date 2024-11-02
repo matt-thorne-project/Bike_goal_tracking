@@ -15,22 +15,24 @@ sql = """
 WITH delta AS (
 SELECT 
     date
-    , ftp
-    ,(ftp - LAG(ftp, 1,0) OVER (ORDER BY date))AS delta
-    , LAG(ftp, 1,0) OVER (ORDER BY date) AS previous_ftp
+	, ftp 
+    ,  (ftp - LAG(ftp, 1,0) OVER (ORDER BY date)) AS ftpDelta
+    ,  LAG(ftp, 1,0) OVER (ORDER BY date) AS previousFtp
 FROM 
     bikes.t_measurements
 )
 SELECT 
     date
     , ftp
-    , delta AS watt_delta
+    , ftpDelta	
+    , ((DIV((ftpDelta::numeric), previousFtp::numeric)) * 100.0) AS percentageDelta
 FROM
     delta
 WHERE
-    delta.delta != 0
+    delta.ftpDelta != 0
+	AND delta.previousFtp != 0
 ORDER BY
-    date ASC;"""
+    date ASC"""
 
 cursor.execute(sql)
 results = list(cursor.fetchall())
