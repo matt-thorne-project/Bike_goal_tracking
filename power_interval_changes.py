@@ -1,20 +1,35 @@
 from matplotlib import pyplot as plt
-import mysql.connector
+import psycopg2
+import matplotlib.dates as mdates
+import numpy as np
+import pandas as pd
 
-
-mydb = mysql.connector.connect(
+connection = psycopg2.connect(
   host = "xxx",
+  port = "xxx",
   user = "xxx",
-  passwd = "xxx",
+  password = "xxx",
   database = "xxx"
 )
 
-mycursor = mydb.cursor()
+cursor = connection.cursor()
 
-sql = "SELECT date, 60_sec, 5_min, 20_min, 60_min, 90_min FROM t_interval_power_weight WHERE date > CURDATE() - INTERVAL 18 MONTH"
+sql = """
+SELECT 
+	date
+	, "1_min"
+	, "5_min"
+	, "20_min"
+	, "60_min"
+	, "90_min"
+FROM 
+	bikes.t_interval_power_weight 
+WHERE 
+	date > CURRENT_DATE - INTERVAL '24 MONTH'
+"""
 
-mycursor.execute(sql)
-results = list(mycursor.fetchall())
+cursor.execute(sql)
+results = list(cursor.fetchall())
 
 date = []
 sixty_sec = []
@@ -35,21 +50,19 @@ for i in results:
 plt.figure(figsize = (20, 30))
 
 # Plotting all the intervals
-plt.step(date, sixty_sec, color='r', label='60s') 
+plt.step(date, sixty_sec, color='r', label='60s')
 plt.step(date, five_min, color='g', label='5m')
-  
+plt.step(date, twenty_min, color='b', label='20m')
+
 # Naming x-axis, y-axis
 plt.xlabel("Month") 
 plt.ylabel("W/kg") 
 
 plt.legend() 
-plt.gca().xaxis.set_major_locator(locator)
-plt.gca().xaxis.set_major_formatter(fmt)
 plt.show()
 
 plt.figure(figsize = (20, 30))
-
-plt.step(date, twenty_min, color='b', label='20m') 
+ 
 plt.step(date, sixty_min, color='y', label='60m') 
 plt.step(date, ninety_min, color='r', label='90m') 
 
@@ -58,6 +71,4 @@ plt.xlabel("Month")
 plt.ylabel("W/kg") 
 
 plt.legend() 
-plt.gca().xaxis.set_major_locator(locator)
-plt.gca().xaxis.set_major_formatter(fmt)
 plt.show()
